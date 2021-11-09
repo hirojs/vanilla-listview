@@ -1,6 +1,6 @@
 const Key = Symbol('key');
 
-function destroy(thing) {
+function tryDestroy(thing) {
 	if (typeof thing.destroy === 'function') {
 		thing.destroy();
 	}
@@ -18,10 +18,11 @@ module.exports = function createListView(root, {key, build, items = [], debug = 
 
 	function _set(newItems) {
 		let insertions = 0, deletions = 0, pos = 0;
+
 		newItems.forEach((item) => {
 			item = _findOrBuild(item);
 			if (root.childNodes[pos] !== item.root) {
-				root.insertBefore(item.root, root.childNodes[pos+1] || null);
+				root.insertBefore(item.root, root.childNodes[pos] || null);
 				insertions++;
 			}
 			pos++;
@@ -32,7 +33,7 @@ module.exports = function createListView(root, {key, build, items = [], debug = 
 			const key = victim[Key];
 			const el = itemCache.get(key);
 			itemCache.delete(key);
-			destroy(el);
+			tryDestroy(el);
 			root.removeChild(victim);
 			deletions++;
 		}
@@ -57,7 +58,7 @@ module.exports = function createListView(root, {key, build, items = [], debug = 
 	}
 
 	function _destroy() {
-		itemCache.forEach(el, destroy);
+		itemCache.forEach(el, tryDestroy);
 		itemCache.clear();
 		root.innerHTML = '';
 	}
