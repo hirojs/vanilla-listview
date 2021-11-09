@@ -1,0 +1,23 @@
+{
+  "name": "@hirojs/vanilla-listview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -o demo/bundle.js demo/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirojs/vanilla-listview.git"
+  },
+  "author": "Jason Frame",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hirojs/vanilla-listview/issues"
+  },
+  "homepage": "https://github.com/hirojs/vanilla-listview#readme",
+  "devDependencies": {
+    "watchify": "^4.0.0"
+  }
+}
